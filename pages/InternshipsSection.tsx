@@ -4,6 +4,18 @@ import ChevronRightIcon from '../components/icons/ChevronRightIcon';
 import { useIntersectionObserver } from '../components/hooks/useIntersectionObserver';
 import LogoIcon from '../components/icons/LogoIcon';
 
+interface Internship  {
+  title:string;
+  company:string;
+  description: string;
+  type:string;
+}
+
+interface Func {
+  data: Internship;
+  isActive: boolean;
+}
+
 const internshipData = [
   { 
     title: "UI/UX DESIGNER", 
@@ -31,7 +43,7 @@ const internshipData = [
   },
 ];
 
-const InternshipCard = ({ internship, isActive }) => (
+const InternshipCard: React.FC<Func>  = ({ data: internship, isActive }) => (
     <div className={`flex-shrink-0 w-72 h-48 bg-gradient-to-br from-white/40 to-white/10 backdrop-blur-lg rounded-3xl p-6 flex flex-col justify-between items-start text-white shadow-2xl border border-white/20 transition-all duration-500 ${isActive ? 'scale-110 -translate-y-4' : 'scale-90 opacity-60'}`}>
         <div>
             <h3 className="text-xl font-bold">{internship.title}</h3>
@@ -79,7 +91,7 @@ const InternshipsSection: React.FC = () => {
 
                 <div className="absolute w-[200%] md:w-full h-full flex items-center justify-center transition-transform duration-500 ease-in-out" style={{ transform: `translateX(${-activeIndex * 22}rem)`}}>
                     <div className="flex items-center gap-8">
-                        {internshipData.map((item, i) => <InternshipCard key={i} internship={item} isActive={i === activeIndex} />)}
+                        {internshipData.map((item, i) => <InternshipCard key={i} data={item} isActive={i === activeIndex} />)}
                     </div>
                 </div>
 
